@@ -78,7 +78,8 @@ class T2(object):
     def set_sidebar(self):
         st.sidebar.header("Press Submit after answering the below questions :")
         self.race = float(self.race_dict[st.sidebar.radio("Your race:", tuple(self.race_dict.keys()), help="Race")])
-        self.gender = float(self.sex_dict[st.sidebar.radio("Your gender:", tuple(self.sex_dict.keys()))])
+        self.gender = float(self.sex_dict[st.sidebar.radio("Your gender:", tuple(self.sex_dict.keys()),
+                                                           help="Enter your biological gender")])
         # self.age_grp = float(self.age_grp[st.sidebar.radio("Your age group:", tuple(self.age_grp.keys()))])
         self.age_grp = float(self.age_grp[get_ageGrp(st.sidebar.number_input(label="Your age:", min_value=1,
                                                                              max_value=100, step=1))])
@@ -116,7 +117,7 @@ class T2(object):
             + self.bmi
         prob = round(100 / (1 + (1 / math.exp(s))), 2)
         # st.write(f"Sum: {s}")
-        original_title = f'<h3 style="color:Grey; font-size: 20px;">The probability of type II ' \
+        original_title = f'<h3 style="color:White; font-size: 20px;">The probability of type II ' \
                          f'diabetes is: <span style=color:Orange>{prob}</span> % </h3>'
         st.markdown(original_title, unsafe_allow_html=True)
         with open('images/dia1.jpg', "rb") as image_file:
@@ -137,7 +138,9 @@ class T2(object):
     def set_title_header(self):
         c1, c2 = st.columns([1, 5])
         # c1.image()
-        c2.header("A project by Dr. Truong and Annika Mondal")
+        title = '<title style="color:White; font-size: 20px;">A project by Dr. Truong and Annika Mondal  </title>'
+        st.markdown(title, unsafe_allow_html=True)
+        # c2.header("A project by Dr. Truong and Annika Mondal")
         st.write(
             "Check out profile of Annika [link]("
             "www.google.com)")
