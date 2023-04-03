@@ -178,7 +178,7 @@ class Diabetes(object):
         # title = '<title style="color:White; font-size: 20px;">A project by Dr. Truong and Annika Mondal  </title>'
         # st.markdown(title, unsafe_allow_html=True)
         # c2.header("A project by Dr. Truong and Annika Mondal")
-        self.show_bg_image()
+        # self.show_bg_image()
         title("Title")
         header("A project by Dr. Truong and Annika Mondal")
         write(
@@ -190,15 +190,15 @@ class Diabetes(object):
 
 
 if __name__ == '__main__':
-    streamlit_style = """
-    			<style>
-    			@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
-    			html, body, [class*="css"]  {
-    			font-family: 'Roboto', sans-serif;
-    			}
-    			</style>
-    			"""
-    st.markdown(streamlit_style, unsafe_allow_html=True)
+    # streamlit_style = """
+    # 			<style>
+    # 			@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+    # 			html, body, [class*="css"]  {
+    # 			font-family: 'Roboto', sans-serif;
+    # 			}
+    # 			</style>
+    # 			"""
+    # st.markdown(streamlit_style, unsafe_allow_html=True)
     diabetes = Diabetes()
     diabetes.set_title_header()
     with diabetes.tab1:
@@ -207,7 +207,7 @@ if __name__ == '__main__':
             diabetes.set_columns()
             submit_button = st.form_submit_button(label='Submit', on_click=diabetes.calc_probability())
             # write(submit_button)
-        write(f"The probability of having type 2 diabetes : {round(diabetes.result * 100, 2)}%", "green" if float(
+        write(f"The probability of having type 2 diabetes : {round(diabetes.result , 2)}%", "green" if float(
             diabetes.result) < .5 else
         "red")
 
