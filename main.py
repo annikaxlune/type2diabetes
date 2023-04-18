@@ -113,7 +113,7 @@ class Diabetes(object):
 
     def set_columns(self):
         st.header("Press Submit after answering the below questions :")
-        col1, col2, col3 = st.columns(3)
+        col1, col2, col3= st.columns(3)
         with col1:
             # st.write("Demographic information")
             self.race = float(self.race_dict[st.radio("Your race:", tuple(self.race_dict.keys()), help="Race",
@@ -121,29 +121,35 @@ class Diabetes(object):
             self.gender = float(self.sex_dict[st.radio("Your gender:", tuple(self.sex_dict.keys()),
                                                        help="Enter your biological gender")])
             # self.age_grp = float(self.age_grp[st.radio("Your age group:", tuple(self.age_grp.keys()))])
-            self.age_grp = float(self.age_grp[get_ageGrp(st.number_input(label="Your age:", min_value=1,
-                                                                         max_value=100, step=1))])
+            c1, c2, c3 = st.columns(3)
+            with c1:
+                self.age_grp = float(self.age_grp[get_ageGrp(st.number_input(label="Your age:", value=35, min_value=1,
+                                                                             max_value=100, step=1))])
 
         # self.hypertension = float(self.ht_dict[st.radio("Blood pressure over 140 mmHg ?",
         #                                                         tuple(self.ht_dict.keys()))])
         with col2:
-            self.LDL_level = float(self.ldl_dict["Yes" if (st.slider(label="Your LDL (mg/dL) ?:", min_value=0,
-                                                                     max_value=250)) < 150 else "No"])
-            self.hypertension = float(
-                self.ht_dict[get_ht_ind((st.number_input("Enter your blood pressure level (mmHg): ",
-                                                         min_value=0, max_value=500)))])
+            c1, c2, c3 = st.columns(3)
+            with c1:
+                self.LDL_level = float(self.ldl_dict["Yes" if (st.slider(label="Your LDL (mg/dL) ?:", min_value=0,
+                                                                         max_value=250)) < 150 else "No"])
+                self.hypertension = float(
+                    self.ht_dict[get_ht_ind((st.number_input("Enter your blood pressure level (mmHg): ",
+                                                             value=120, min_value=0, max_value=500)))])
 
-            self.trig = float(self.trig_dict[get_trigLevel(st.number_input("Enter triglycerides:", ))])
+                self.trig = float(self.trig_dict[get_trigLevel(st.number_input("Enter triglycerides:", value=90))])
 
         with col3:
-            self.hglycemia = float(self.hg_dict[get_glucoseLevel(st.number_input("Glucose level per latest test :",
-                                                                                 min_value=90,
-                                                                                 max_value=400))])
-            self.height = float(
-                st.number_input('Enter your height in feet:', min_value=2.0, max_value=10.0, step=.25))
-            self.weight = float(st.number_input("Enter your weight in LBs:", min_value=10.0, max_value=600.0,
-                                                step=.5))
-            self.bmi = self.bmi_dict[get_bmiCat(703 * self.weight / ((self.height * 12) ** 2))]
+            c1, c2, c3 = st.columns(3)
+            with c1:
+                self.hglycemia = float(self.hg_dict[get_glucoseLevel(st.number_input("Glucose level per latest test :",
+                                                                                     min_value=90,
+                                                                                     max_value=400))])
+                self.height = float(
+                    st.number_input('Enter your height in feet:', min_value=2.0, max_value=10.0, step=.25))
+                self.weight = float(st.number_input("Enter your weight in LBs:", min_value=10.0, max_value=600.0,
+                                                    step=.5))
+                self.bmi = self.bmi_dict[get_bmiCat(703 * self.weight / ((self.height * 12) ** 2))]
 
     def calc_probability(self):
         s = self.intercept + self.race + self.gender + self.age_grp + self.LDL_level + self.hypertension + self.trig + self.hglycemia \
@@ -181,13 +187,14 @@ class Diabetes(object):
         # self.show_bg_image()
         st.title(":blue[TYPE 2 DIABETES PROBABILITY :heart:]")
         # header("A project by Dr. Truong and Annika Mondal")
-        st.markdown(
-            "Check out profile of Annika [link](www.google.com)")
+        # st.markdown(
+        #     "Check out profile of Annika [link](www.google.com)")
         st.markdown("""---""")
         self.tab1, self.tab2, self.tab3 = st.tabs(['Summary', 'Diabetes', 'Work'])
 
 
 if __name__ == '__main__':
+
     # streamlit_style = """
     # 			<style>
     # 			@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
@@ -198,18 +205,26 @@ if __name__ == '__main__':
     # 			"""
     # st.markdown(streamlit_style, unsafe_allow_html=True)
     st.set_page_config(layout="wide")
+    css = r'''
+        <style>
+            [data-testid="stForm"] {border: 0px}
+        </style>
+    '''
 
+    st.markdown(css, unsafe_allow_html=True)
     diabetes = Diabetes()
     diabetes.set_title_header()
-    with diabetes.tab1:
-        st.header("chance of diabetes")
-        with st.form(key="my_form"):
-            diabetes.set_columns()
-            submit_button = st.form_submit_button(label='Submit', on_click=diabetes.calc_probability())
-            # write(submit_button)
-        write(f"The probability of having type 2 diabetes : {round(diabetes.result, 2)}%", "green" if float(
-            diabetes.result) < .5 else
-        "red")
+    c1,c2=st.columns(2)
+    with c1:
+        with diabetes.tab1:
+            # st.header("chance of diabetes")
+            with st.form(key="my_form"):
+                diabetes.set_columns()
+                submit_button = st.form_submit_button(label='Submit', on_click=diabetes.calc_probability())
+                # write(submit_button)
+            write(f"The probability of having type 2 diabetes : {round(diabetes.result, 2)}%", "green" if float(
+                diabetes.result) < .5 else
+            "red")
 
-    with diabetes.tab3:
-        displayPDF('resources/writing_diab.pdf')
+        with diabetes.tab3:
+            displayPDF('resources/writing_diab.pdf')
