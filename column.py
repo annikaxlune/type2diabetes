@@ -173,20 +173,18 @@ class Diabetes(object):
         st.markdown("""---""")
 
     def set_title_header(self):
-        c1, c2 = st.columns([1, 5])
+        # c1, c2 = st.columns([1, 5])
         # c1.image()
-        # title = '<title style="color:White; font-size: 20px;">A project by Dr. Truong and Annika Mondal  </title>'
+        # title = '<title style="color:red; font-size: 20px;">TYPE 2 DIABETES PROBABILITY</title>'
         # st.markdown(title, unsafe_allow_html=True)
         # c2.header("A project by Dr. Truong and Annika Mondal")
         # self.show_bg_image()
-        title("Title")
-        header("A project by Dr. Truong and Annika Mondal")
-        write(
-            "Check out profile of Annika [link]("
-            "www.google.com)")
+        st.title(":blue[TYPE 2 DIABETES PROBABILITY :heart:]")
+        # header("A project by Dr. Truong and Annika Mondal")
+        st.markdown(
+            "Check out profile of Annika [link](www.google.com)")
         st.markdown("""---""")
         self.tab1, self.tab2, self.tab3 = st.tabs(['Summary', 'Diabetes', 'Work'])
-
 
 
 if __name__ == '__main__':
@@ -199,6 +197,8 @@ if __name__ == '__main__':
     # 			</style>
     # 			"""
     # st.markdown(streamlit_style, unsafe_allow_html=True)
+    st.set_page_config(layout="wide")
+
     diabetes = Diabetes()
     diabetes.set_title_header()
     with diabetes.tab1:
@@ -207,7 +207,7 @@ if __name__ == '__main__':
             diabetes.set_columns()
             submit_button = st.form_submit_button(label='Submit', on_click=diabetes.calc_probability())
             # write(submit_button)
-        write(f"The probability of having type 2 diabetes : {round(diabetes.result , 2)}%", "green" if float(
+        write(f"The probability of having type 2 diabetes : {round(diabetes.result, 2)}%", "green" if float(
             diabetes.result) < .5 else
         "red")
 
