@@ -92,7 +92,7 @@ smmap==4.0.0
 sniffio==1.2.0
 soupsieve==2.3.2.post1
 stack-data==0.2.0
-streamlit==1.18.1
+streamlit==1.26.0
 terminado==0.17.1
 tinycss2==1.2.1
 toml==0.10.2
