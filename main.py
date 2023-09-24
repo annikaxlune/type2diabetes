@@ -337,7 +337,7 @@ if __name__ == '__main__':
                     "personalized recommendation to manage your condition.</h4>",
                     unsafe_allow_html=True)
 
-        tab0,tab1, tab2 = st.tabs(['T','FAQs', 'Recommendations'])
+        tab0, tab1, tab2 = st.tabs(['T', 'FAQs', 'Recommendations'])
         with tab1:
             # st.markdown("<h4 style='color: black'>More of this</h4>", unsafe_allow_html=True)
             # with st.expander("What is type2 Diabetes ?"):
@@ -353,6 +353,42 @@ if __name__ == '__main__':
                         "<li>Eat healthy fats.</li>"
                         "<li>Skip fad diets and make healthier choices.</li>"
                         "</ul>", unsafe_allow_html=True)
+
+            st.markdown("<h5>Why take care of your diabetes?</h5>", unsafe_allow_html=True)
+            # with st.expander("what are the ways to reduce diabetes?"):
+            st.markdown(
+                "Taking care of yourself and your diabetes can help you feel good today and in the future. When your blood sugar (glucose) is close to normal, you are likely to:"
+                "<ul>"
+                "<li>Lose extra weight. Losing weight reduces the risk of diabetes.</li>"
+                "<li>Be more physically active. There are many benefits to regular physical activity.</li>"
+                "<li>Eat healthy plant foods. Plants provide vitamins, minerals and carbohydrates in your diet.</li>"
+                "<li>Eat healthy fats.</li>"
+                "<li>Skip fad diets and make healthier choices.</li>"
+                "</ul>"
+                "<p>You will also have less chance of having health problems caused by diabetes such as:</p>"
+                "<ul>"
+                "<li>heart attack or stroke.</li>"
+                "<li>eye problems that can lead to trouble seeing or going blind.</li>"
+                "<li>pain, tingling, or numbness in your hands and feet, also called nerve damage.</li>"
+                "<li>kidney problems that can cause your kidneys to stop working.</li>"
+                "<li>teeth and gum problems.</li>"
+                "</ul>"
+                , unsafe_allow_html=True)
+            st.markdown("<h5>Will supplements and vitamins help my diabetes?</h5>", unsafe_allow_html=True)
+            # with st.expander("what are the ways to reduce diabetes?"):
+            st.markdown("No clear proof exists that taking [dietary supplements]("
+                        "https://nccih.nih.gov/health/diabetes/supplements) NIH external link such as vitamins, "
+                        "minerals, herbs, or spices can help manage diabetes.1 You may need supplements if you cannot get enough vitamins and minerals from foods."
+                        , unsafe_allow_html=True)
+
+            st.markdown("<h5>Take care of your feet</h5>", unsafe_allow_html=True)
+            # with st.expander("what are the ways to reduce diabetes?"):
+            st.markdown("People with diabetes may have problems with their feet because of poor blood flow and nerve "
+                        "damage that can result from high blood glucose levels. To help prevent foot problems, "
+                        "you should wear comfortable, supportive shoes and [take care of your feet]("
+                        "https://www.niddk.nih.gov/health-information/diabetes/overview/preventing-problems/foot-problems) before, during, "
+                        "and after physical activity."
+                        , unsafe_allow_html=True)
 
         with tab2:
             st.markdown("<h4 style='color: black'>Less of this</h4>", unsafe_allow_html=True)
