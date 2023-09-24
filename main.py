@@ -2,12 +2,18 @@ import base64
 import math
 import random
 from glob import glob
+import os
 
 import streamlit as st
 from pathlib import Path
 
-columnColor = 'orange'
+columnColor = 'blue'
 helpColor = 'violet'
+textcolor = 'cornflowerblue'
+
+my_user = os.environ.get("USER")
+is_aws = True if "ec2" in my_user else False
+ec2_base_dir = '/home/ec2-user/projects/type2diabetes/' if is_aws else './'
 
 
 # [data-TestId = "baseButton-header"] {
@@ -18,10 +24,11 @@ helpColor = 'violet'
 # background-image: url("https://type2-diabetes-images.s3.us-west-2.amazonaws.com/flat-lay-doodle-template-for-diabetes-concept-black-and-white-vector-illustration-top-view-2DADTBR.jpg")
 
 def add_bg_from_url():
+    # rgb(191, 87, 0) for UT color
     background_img = """
     <style>
         [data-testId = "stHeader"] {
-        background-color: rgb(191, 87, 0)
+        background-color: rgb(0,0,139)
         }
     body
         {
@@ -33,7 +40,8 @@ def add_bg_from_url():
         }
     </style>
     """ % img_to_bytes(
-        "images/flat-lay-doodle-template-for-diabetes-concept-black-and-white-vector-illustration-top-view-2DADTBR.jpg")
+        f"{ec2_base_dir}images/flat-lay-doodle-template-for-diabetes-concept-black-and-white"
+        "-vector-illustration-top-view-2DADTBR.jpg")
 
     st.markdown(
         background_img,
@@ -166,7 +174,7 @@ class Diabetes(object):
 
     def set_columns(self):
         # st.header("Press Submit after answering the below questions :")
-        st.markdown("<h4 style='color: rgb(191, 87, 0);'>Press Submit after "
+        st.markdown(f"<h4 style='color: {textcolor};'>Press Submit after "
                     "answering the below questions :</h4>", unsafe_allow_html=True)
         col1, col2, col3 = st.columns(3)
         with col1:
@@ -283,18 +291,20 @@ class Diabetes(object):
     def set_title_header(self):
         c1, c2 = st.columns([9, 1])
         with c1:
-            st.markdown("<h2 style='text-align: right; color: rgb(191, 87, 0);'>Predictive Model For Calculating "
+            st.markdown(f"<h2 style='text-align: right; color: {textcolor};'>Predictive Model For Calculating "
                         "Risk Of Type 2 Diabetes </h2>",
                         unsafe_allow_html=True)
             st.markdown(
-                "<p style='text-align: right; color: rgb(191, 87, 0); font-style: italic'>- Mondal, Annika and Dr. Truong Chau, "
+                f"<p style='text-align: right; color: {textcolor}; font-style: italic'>- Mondal, Annika and Dr. "
+                f"Truong Chau, "
                 "Ph.D. UTHealth School of Public Health, Houston, TX, USA</p>",
                 unsafe_allow_html=True)
         with c2:
             st.markdown(
                 '''[<img src='data:image/png;base64,{}' class='img-fluid' width=128 height=128 style="float:right">](
-                https://sph.uth.edu/campuses/houston)'''.format(
-                    img_to_bytes("images/UTHealth_SPH_Logo.jpg")), unsafe_allow_html=True)
+                https://www.cdc.gov/diabetes/basics/index.html)'''.format(
+                    img_to_bytes(f"{ec2_base_dir}images/diabetes_logo.png")),
+                unsafe_allow_html=True)
 
 
 if __name__ == '__main__':
@@ -305,7 +315,7 @@ if __name__ == '__main__':
     )
     css = r'''
         <style>
-            [data-testid="stForm"] {border: 0px}
+            [data-testid="stForm"] {border: 5px}
         </style>
     '''
     add_bg_from_url()
@@ -322,18 +332,31 @@ if __name__ == '__main__':
         diabetes.display_bmi()
         result_text_color = "green" if float(diabetes.result) < 50 else "red"
         st.markdown(f":{result_text_color}[**The probability of having type 2 diabetes : "
-                    f"{round(diabetes.result, 2)}**]")
-        st.markdown("<h4 style='text-align: left; color: rgb(191, 87, 0); font-style: normal'>Check below your "
+                    f"{round(diabetes.result, 2)} %**]")
+        st.markdown(f"<h4 style='text-align: left; color: {textcolor}; font-style: normal'>Check below your "
                     "personalized recommendation to manage your condition.</h4>",
                     unsafe_allow_html=True)
 
-        tab1, tab2 = st.tabs(['DOs', 'DONTs'])
+        tab0,tab1, tab2 = st.tabs(['T','FAQs', 'Recommendations'])
         with tab1:
-            st.markdown("<h4 style='color: black'>More of this</h4>",unsafe_allow_html=True)
+            # st.markdown("<h4 style='color: black'>More of this</h4>", unsafe_allow_html=True)
+            # with st.expander("What is type2 Diabetes ?"):
+            st.markdown("<h5>What is type2 Diabetes ?</h5>", unsafe_allow_html=True)
+            st.markdown(
+                "Type 2 diabetes (T2D) is considered a metabolic disorder that occurs when the body’s metabolism is disrupted or not functioning properly, often due to a chemical dysfunction.  In TD2 the body continues to produce insulin but is unable to metabolize it effectively.")
+            st.markdown("<h5>what are the ways to reduce diabetes?</h5>", unsafe_allow_html=True)
+            # with st.expander("what are the ways to reduce diabetes?"):
+            st.markdown("<ul>"
+                        "<li>Lose extra weight. Losing weight reduces the risk of diabetes.</li>"
+                        "<li>Be more physically active. There are many benefits to regular physical activity.</li>"
+                        "<li>Eat healthy plant foods. Plants provide vitamins, minerals and carbohydrates in your diet.</li>"
+                        "<li>Eat healthy fats.</li>"
+                        "<li>Skip fad diets and make healthier choices.</li>"
+                        "</ul>", unsafe_allow_html=True)
 
         with tab2:
-            st.markdown("<h4 style='color: black'>Less of this</h4>",unsafe_allow_html=True)
+            st.markdown("<h4 style='color: black'>Less of this</h4>", unsafe_allow_html=True)
 
     # with diabetes.tab3:
     with st.expander(f"**Project Detail**"):
-        displayPDF('resources/t2dposter_v1.pdf')
+        displayPDF(f'{ec2_base_dir}resources/t2dposter_v1.pdf')

@@ -8,7 +8,7 @@
 
 [theme]
 base="light"
-primaryColor="#f67733"
-backgroundColor="#c9c5c5"
-textColor="#5e5d57"
+primaryColor="#a9a9a9"
+backgroundColor="#ffffff"
+textColor="#6495ed"
 font="serif"
