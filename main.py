@@ -295,9 +295,9 @@ class Diabetes(object):
                         "Risk Of Type 2 Diabetes </h2>",
                         unsafe_allow_html=True)
             st.markdown(
-                f"<p style='text-align: right; color: {textcolor}; font-style: italic'>- Mondal, Annika and Dr. "
+                f"<p style='text-align: right; color: {textcolor}; font-style: italic'>-- Annika Mondal and Dr. "
                 f"Truong Chau, "
-                "Ph.D. UTHealth School of Public Health, Houston, TX, USA</p>",
+                "Ph.D.</p>",
                 unsafe_allow_html=True)
         with c2:
             st.markdown(
@@ -337,7 +337,7 @@ if __name__ == '__main__':
                     "personalized recommendation to manage your condition.</h4>",
                     unsafe_allow_html=True)
 
-        tab0, tab1, tab2 = st.tabs(['T', 'FAQs', 'Recommendations'])
+        tab0, tab1, tab2 = st.tabs(['>>', 'FAQs', 'Recommendations'])
         with tab1:
             # st.markdown("<h4 style='color: black'>More of this</h4>", unsafe_allow_html=True)
             # with st.expander("What is type2 Diabetes ?"):
@@ -391,8 +391,50 @@ if __name__ == '__main__':
                         , unsafe_allow_html=True)
 
         with tab2:
-            st.markdown("<h4 style='color: black'>Less of this</h4>", unsafe_allow_html=True)
+            st.markdown("<h5>Following these steps will more likely make blood sugar stay in a healthy range. Also "
+                        "might "
+                        "help in delaying or preventing complications</h5>"
+                        "<h6>Healthy eating</h6> "
+                        "<p>There's no specific "
+                        "diabetes diet. However, it's important to center your diet around: "
+                        "<ul>"
+                        "<li>A regular schedule "
+                        "for meals and healthy snacks </li> "
+                        "<li>Smaller portion sizes and fewer calories. </li>"
+                        "<li>More high-fiber "
+                        "foods, such as fruits, no starchy vegetables and whole grains. </li>"
+                        "<li> Fewer refined grains, "
+                        "starchy vegetables and sweets. </li> "
+                        "<li>Modest servings of low-fat dairy, low-fat meats and "
+                        "fish</li>"
+                        "<li>Healthy cooking oils, such as olive oil or canola oil.</li>"
+                        "</ul>"
+                        "</p>"
+                        "<h6>Physical activity</h6>"
+                        "<p>Exercise is "
+                        "important for losing weight or maintaining a healthy weight. It also helps with managing "
+                        "blood sugar. Talk to your health care provider before starting or changing your exercise "
+                        "program to ensure that activities are safe for you. Breaking up long periods of inactivity, "
+                        "such as sitting at the computer, can help control blood sugar levels. Take a few minutes to "
+                        "stand, walk around or do somelight activity every 30 minutes.</p>"
+                        "<h6>Weight loss </h6>"
+                        "<p>Weight loss "
+                        "results in better control of blood sugar levels, cholesterol, triglycerides and blood "
+                        "pressure. If you're overweight, you may begin to see improvements in these factors after "
+                        "losing as little as 5% of your body weight. However, the more weight you lose, the greater "
+                        "the benefit to your health. In somecases, losing up to 15% of body weight may be "
+                        "recommended. </p>"
+                        "<h6>Monitoring your blood sugar</h6>"
+                        "<p>Your health care provider will advise you on how often "
+                        "to check your blood sugar level to make sure you remain within your target range. You may, for example, need to check it once a day and before or after exercise. "
+                        "If you take insulin, you may need to check your blood sugar multiple times a day. Monitoring isusually done with a small, at-home device called a blood glucose meter, which measures the amount ofsugar in a drop of blood. Keep a record of your measurements to share with your health care team.</p>"
+                        "<h6> Medication </h6>"
+                        "<p>Insulin and other diabetes medications are designed to lower your blood "
+                        "sugar levels when diet and exercise alone aren&#39;t sufficient for managing diabetes. But "
+                        "the effectiveness of these medications depends on the timing and size of the dose. "
+                        "Medications you take for conditions other than diabetes also can affect your blood sugar "
+                        "levels.</p>", unsafe_allow_html=True)
 
     # with diabetes.tab3:
     with st.expander(f"**Project Detail**"):
-        displayPDF(f'{ec2_base_dir}resources/t2dposter_v1.pdf')
+        displayPDF(f'{ec2_base_dir}resources/final_abstract_v1.pdf')
