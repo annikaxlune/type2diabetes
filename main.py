@@ -322,6 +322,8 @@ if __name__ == '__main__':
         page_title='Type 2 Diabetes',
         layout="wide",
         initial_sidebar_state="expanded",
+        page_icon="heart",
+
     )
     css = r'''
         <style>
