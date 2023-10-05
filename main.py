@@ -307,6 +307,16 @@ class Diabetes(object):
                 unsafe_allow_html=True)
 
 
+def hide_streamlit_logo():
+    hide_streamlit_style = """
+                <style>
+                #MainMenu {visibility: hidden;}
+                footer {visibility: hidden;}
+                </style>
+                """
+    st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+
+
 if __name__ == '__main__':
     st.set_page_config(
         page_title='Type 2 Diabetes',
@@ -319,6 +329,8 @@ if __name__ == '__main__':
         </style>
     '''
     add_bg_from_url()
+
+    hide_streamlit_logo()
 
     st.markdown(css, unsafe_allow_html=True)
     diabetes = Diabetes()
