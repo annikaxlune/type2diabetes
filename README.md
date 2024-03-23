@@ -9,4 +9,4 @@
 `tmux new -s StreamSession` \
 In the editor - \
 `streamlit run main.py`
->press cmd+B and then D to come out of tmux session
+>press ctrl+B and then D to come out of tmux session
