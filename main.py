@@ -121,18 +121,24 @@ def title(param):
         unsafe_allow_html=True)
 
 
+def downloadPDF(file):
+    with open(file, 'rb') as f:
+        base64_pdf = base64.b64encode(f.read()).decode('utf-8')
+
+    button_text="download"
+    href = f'<a href="data:application/octet-stream;base64,{base64_pdf}" download="downloaded_file.pdf">{button_text}</a>'
+    st.markdown(href, unsafe_allow_html=True)
+
 def displayPDF(file):
     # Opening file from file path. this is used to open the file from a website rather than local
     with open(file, 'rb') as f:
         base64_pdf = base64.b64encode(f.read()).decode('utf-8')
 
-    # st.download_button(label="Research Paper",data=f)
-
     # Embedding PDF in HTML
-    # pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="1000" height="950" ' \
-    #               f'type="application/pdf"></iframe>'
-    pdf_display = (f'<embed src="data:application/pdf;base64,{base64_pdf}" width="1000" height="950" '
-                    f'type="application/pdf">')
+    pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="1000" height="950" ' \
+                  f'type="application/pdf"></iframe>'
+    # pdf_display = (f'<embed src="data:application/pdf;base64,{base64_pdf}" width="1000" height="950" '
+    #                 f'type="application/pdf">')
 
     # Displaying File
     st.markdown(pdf_display, unsafe_allow_html=True)
@@ -453,6 +459,11 @@ if __name__ == '__main__':
                         "Medications you take for conditions other than diabetes also can affect your blood sugar "
                         "levels.</p>", unsafe_allow_html=True)
 
+    with st.expander(f"**Project Detail - Download**"):
+        downloadPDF(f'{ec2_base_dir}resources/final_abstract_v1.pdf')
+
     # with diabetes.tab3:
-    with st.expander(f"**Project Detail**"):
+    with st.expander(f"**Project Detail - View**"):
         displayPDF(f'{ec2_base_dir}resources/final_abstract_v1.pdf')
+
+
